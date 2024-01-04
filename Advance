@@ -1,0 +1,13 @@
+import java.util.Arrays;
+public class Advance extends Competitor {
+    public Advance(int competitorID, int [] scores, String name, String email, String category){
+        super(competitorID, scores, name, email, category);
+    }
+
+    @Override
+    public double getOverallScore(){
+        int[] scores = getScoreArray();
+        return Arrays.stream(scores).sum() * 2.2 / scores.length;
+
+    }
+}
