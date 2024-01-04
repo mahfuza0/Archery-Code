@@ -1,0 +1,95 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
+
+public abstract class Competitor {
+    private int competitorID;
+    private int[] scores;  // I have added Scores in this class;(It is not mentioned in UML diagram)
+    private String name;
+    private String category;
+    private String email;
+
+
+    public Competitor(int competitorID, int[] scores, String name, String email, String category) {
+        this.competitorID = competitorID;
+        this.scores = scores;
+        this.name = name;
+        this.email = email;
+        this.category = category;
+
+    }
+
+// getter and setters for each attributes
+
+
+    public int getCompetitorID() {
+        return competitorID;
+    }
+
+    public void setCompetitorID(int competitorID) {
+        this.competitorID = competitorID;
+    }
+
+    public int[] getScores() {
+        return scores;
+    }
+
+    public void setScores(int[] scores) {
+        this.scores = scores;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public int[] getScoreArray() {
+        return scores;
+    }
+
+    public void setScoreArray(int[] scores) {
+        this.scores = scores;
+    }
+
+    //A method which will be used later, to get the overall score
+    public abstract double getOverallScore();
+
+    //method which returns a String containing all the details of the competitor
+    public String getFullDetails()
+    {
+        String scoresString = Arrays.toString(this.scores).replace("'", "\\'");
+        return String.format("Competitor ID %d, name %s,  email %s,  category  %s.\n And the Overall score of %.1f.",
+                competitorID, name, email, category, name.split("")[0], scoresString, getOverallScore());
+
+    }
+
+    //method which returns a String containing a ONLY competitor number, initials and overall score
+    public String getShortDetails()
+    {
+        String initials = Arrays.stream(this.name.split(""))
+                .map(name -> name.substring(0,1))
+                .reduce("", (a, b) -> a + b);
+        return String.format("CID %d (%s) has overall score of %.1f,", competitorID, initials, getOverallScore());
+    }
+    
+
+}
