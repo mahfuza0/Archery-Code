@@ -1,1 +1,33 @@
+import java.util.HashSet;
+public class Beginner {
+        private String name;  //nm
+        private int competitorID; //cid
+        private int age;
+        private String category; //cat
+
+        private HashSet<CategoryType> categoryTypes;
+
+        public Beginner(String nm, int cid, int age, String cat){
+
+            name = nm;
+            competitorID = cid;
+            this.age = age;
+            category = cat;
+            categoryTypes = new HashSet<CategoryType>();
+        }
+        public String getName(){return name;}
+        public String getCategory(){return category;}
+        public int getCompetitorID(){return competitorID;}
+        public int getAge(){return age;}
+        public boolean CompareCategory(CategoryType archery){return categoryTypes.contains(category);}
+
+        public String toString() {
+            String s = "";
+            s = "\nName :   " + name + "\ncompetitorID : " + competitorID +    "\nage : " + age +
+                    "\ncategory: " + category;
+            return s;
+        }
+
+    }
+
 
