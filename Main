@@ -1,0 +1,64 @@
+import javax.swing.*;
+
+public class Main {
+    public static void main(String[] args) {
+        //create object and test them
+        //also create Array list of scores
+
+
+        int[] scoresGeorge = {2, 6, 5, 5};
+        int[] scoresKaith = {4, 7, 2, 2};
+        int[] scoresRinon = {1, 1, 5, 7};
+        int[] scoresMark = {5, 7, 4, 2};
+
+
+
+        Competitor George = new Advance(101, "George", 31, "Feild", "Advance");
+        Competitor Kaith = new Intermediate(102, "Kaith", 29, "Target");
+        Competitor Rinon = new Beginner(103, "Rinon", 25, "Target", "ArcheryGame.Beginner");
+        Competitor Mark = new Advance(104, "Mark", 22, "Longbow", "Advance");
+
+
+
+        //Test for George
+        System.out.println(George.getFullDetails());
+        System.out.println(George.getShortDetails());
+
+        //Test for Kaith
+        System.out.println(Kaith.getFullDetails());
+        System.out.println(Kaith.getShortDetails());
+
+        //Test for Rinon
+        System.out.println(Rinon.getFullDetails());
+        System.out.println(Rinon.getShortDetails());
+
+        //Test for Mark
+        System.out.println(Mark.getFullDetails());
+        System.out.println(Mark.getShortDetails());
+        // Now read competitors from the CSV file
+        Manager manager = new Manager();
+        String csvFilePath = "\"C:\\Users\\Administrator\\Desktop\\RunCompetitor.csv\"";
+        manager.readFile(csvFilePath);
+
+        // Create the GUI and pass the populated CompetitorList to it
+        SwingUtilities.invokeLater(() -> {
+            ArcheryGUI gui = new ArcheryGUI(manager.getCompetitorList(), manager);
+            gui.refreshCompetitorTable();
+        });
+
+        // Generate report and print to console
+        manager.generateReport(null);
+
+        // Or generate report and write to a file
+        manager.generateReport("\"C:\\Users\\Administrator\\Desktop\\RunCompetitor.csv\"");
+
+
+
+
+
+    }
+}
+
+
+
+
