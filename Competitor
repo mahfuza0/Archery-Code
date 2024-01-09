@@ -1,20 +1,58 @@
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 
-
-public abstract class Competitor {
+public class Competitor {
     private int competitorID;
-    private int[] scores;  // I have added Scores in this class;(It is not mentioned in UML diagram)
     private String name;
+    private int age;
     private String category;
-    private String email;
+    private int [] scores;
+    private  HashSet<CategoryType> categoryTypes;
+    private CategoryType type;
 
-
-    public Competitor(int competitorID, int[] scores, String name, String email, String category) {
+    public Competitor(String nm, int cid, int age, String cat, int[] scores){
         this.competitorID = competitorID;
-        this.scores = scores;
         this.name = name;
-        this.email = email;
+        this.age = age;
+        this.scores = scores;
+    }
+    public int getCompetitorID() {
+        return competitorID;
+    }
+    public String getName() {
+        return name;
+    }
+    public int getAge() {return age;}
+    public String getCategory(){return category;}
+    public int[] getScoreArray() {return scores;}
+    public void setScoreAry(int[] scores) {this.scores = scores;}
+
+    public double getOverallScore() {
+        return 0;
+    }
+
+    public String getFullDetails() {
+        String scoresString = Arrays.toString(this.scores).replaceAll("[\\[\\]]", "");
+        return String.format("Competitor ID%d, name %s. \n%s is %s aged %d and received total scores:",
+                competitorID, name, name.split(" ")[0], age, scoresString, getOverallScore());
+    }
+
+    public String getShortDetails() {
+        String initials = Arrays.stream(this.name.split(" "))
+                .map(namePart -> namePart.substring(0, 1))
+                .reduce("", (a, b) -> a + b);
+        return String.format("CN %d (%s) has overall score %.1f.", competitorID, initials, getOverallScore());
+    }
+    public CategoryType getType(){return type;}
+
+
+    public void add(Competitor competitor) {}
+
+
+}
+
+}
+
         this.category = category;
 
     }
