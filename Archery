@@ -1,1 +1,168 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+/**
+ * Provide a GUI interface for the game
+ *
+ *
+ */
+public class ArcheryGUI {
+
+    private JFrame myFrame = new JFrame("Archery GUI");
+    private JTextArea listing = new JTextArea();
+    private JLabel codeLabel = new JLabel();
+    private JButton registerBtn = new JButton("Register ArcheryGame.Competitor");
+    private JButton amendBtn = new JButton("Amend ArcheryGame.Competitor");
+    private JButton viewScoreBtn = new JButton("View Scores");
+    private JButton clearBtn = new JButton("Clear");
+    private JPanel eastPanel = new JPanel();
+
+
+    public ArcheryGUI() {
+        makeFrame();
+        makeMenuBar(myFrame);
+    }
+
+    /**
+     * Create the main frame's menu bar.
+     */
+    private void makeMenuBar(JFrame frame) {
+        JMenuBar menubar = new JMenuBar();
+        frame.setJMenuBar(menubar);
+
+        // create the Competitors menu
+        JMenu CompetitorsMenu = new JMenu("Competitors");
+        menubar.add(CompetitorsMenu);
+
+        JMenuItem listCompetitorsID = new JMenuItem("List Competitors ID ");
+        listCompetitorsID.addActionListener(new ListCompetitorsIDHandler());
+        CompetitorsMenu.add(listCompetitorsID);
+
+        JMenuItem listNames = new JMenuItem("List Names");
+        listNames.addActionListener(new ListNamesHandler());
+        CompetitorsMenu.add(listNames);
+
+        JMenuItem listlevel = new JMenuItem("Level");
+        listlevel.addActionListener(new ListlevelHandler());
+        CompetitorsMenu.add(listlevel);
+
+        JMenuItem category = new JMenuItem("ArcheryGame.Category");
+        category.addActionListener(new CategoryHandler());
+        CompetitorsMenu.add(category);
+
+        // create the Battles menu
+        JMenu ArcheryMenu = new JMenu("Archery");
+        menubar.add(ArcheryMenu);
+
+        JMenuItem listArchery = new JMenuItem("List all Archery");
+        listArchery.addActionListener(new ListArcheryHandler());
+        ArcheryMenu.add(listArchery);
+
+
+    }
+
+    /**
+     * Create the Swing frame and its content.
+     */
+    private void makeFrame() {
+        myFrame.setLayout(new BorderLayout());
+        myFrame.add(listing, BorderLayout.CENTER);
+        listing.setVisible(false);
+        myFrame.add(eastPanel, BorderLayout.EAST);
+        // set panel layout and add components
+        eastPanel.setLayout(new GridLayout(4, 1));
+        eastPanel.add(registerBtn);
+        eastPanel.add(amendBtn);
+        eastPanel.add(clearBtn);
+        eastPanel.add(viewScoreBtn);
+        registerBtn.addActionListener(new RegBtnHandler());
+        registerBtn.setVisible(true);
+        amendBtn.addActionListener(new AmendBtnHandler());
+        amendBtn.setVisible(true);
+        clearBtn.addActionListener(new ClearBtnHandler());
+        clearBtn.setVisible(true);
+        viewScoreBtn.addActionListener(new ViewScoreBtnHandler());
+        viewScoreBtn.setVisible(true);
+        // building is done - arrange the components and show
+        myFrame.pack();
+        myFrame.setVisible(true);
+    }
+
+
+
+    private class CompetitorsHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            listing.setVisible(true);
+            String xx = myFrame.getCompetitorsList();
+            listing.setText(xx);
+
+        }
+    }
+
+    private class ListNamesHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            listing.setVisible(true);
+            String xx = myFrame.getName();
+            listing.setText(xx);
+
+        }
+    }
+
+    private class CategoryHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            String ref = JOptionPane.showInputDialog("Enter ArcheryGame.Category: ");
+            JOptionPane.showMessageDialog(myFrame, actionPerformed();
+        }
+    }
+
+
+    public static void main(String[] args) {
+        CompetitorsList competitorList = new CompetitorsList();
+        Manager manager = new Manager();
+
+        // Load CSV data here before initializing the GUI
+        String csvFilePath = "path_to_your_csv_file.csv";
+        manager.readFile(csvFilePath);
+
+        SwingUtilities.invokeLater(() -> {
+            ArcheryGUI gui = new ArcheryGUI(manager.getCompetitorList(), manager);
+            gui.refreshCompetitorTable(); // Refresh the table after GUI is displayed
+        });
+    }
+
+
+    {
+        Manager manager;
+        ArcheryGUI gui = new ArcheryGUI(manager.getCompetitorList(), manager);
+        gui.refreshCompetitorTable();
+    }
+
+    private void refreshCompetitorTable() {
+    }
+
+    private int getMenuItem() {
+        int choice = 100;
+        System.out.println("ArcheryGame.Main Menu");
+        System.out.println("0. Quit");
+        System.out.println("1. List all Name");
+        System.out.println("2. List all Competitors ID");
+        System.out.println("3. View Scores");
+        System.out.println("4. Register ArcheryGame.Competitor");
+        System.out.println("5. Amend ArcheryGame.Competitor");
+
+        private class ClearBtnHandler implements ActionListener {
+            public void actionPerformed(ActionEvent e) {
+                listing.setVisible(false);
+                listing.setText("");
+            }
+        }
+    }
+    public static void main(String[] args) {
+        new ArcheryGUI();
+    }
+}
+
+
 
