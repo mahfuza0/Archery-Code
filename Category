@@ -1,0 +1,37 @@
+public class Category {
+    private String FieldArchery;
+    private String TargetArchery;
+    private String LongbowArchery;
+    private CategoryType type;
+
+    //constructor
+    public Category(String TargetArchery, String FieldArchery, String LongbowArchery)
+    {   this.FieldArchery = FieldArchery;
+        this.TargetArchery = TargetArchery;
+        this.LongbowArchery = LongbowArchery;
+    }
+
+
+    //getter and setters
+    public String getFieldArchery(){return FieldArchery;}
+    public void setFieldArchery(String fieldArchery) {
+        FieldArchery = fieldArchery;
+    }
+
+    public String getLongbowArchery() {
+        return LongbowArchery;
+    }
+
+    public void setLongbowArchery(String longbowArchery) {
+        LongbowArchery = longbowArchery;
+    }
+
+    public String getTargetArchery() {
+        return TargetArchery;
+    }
+
+    public void setTargetArchery(String targetArchery) {
+        TargetArchery = targetArchery;
+    }
+    public CategoryType getType(){return type;}
+}
