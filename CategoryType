@@ -1,0 +1,8 @@
+import java.io.Serializable;
+
+public enum CategoryType implements Serializable {
+    LongBow ("LongBow"), Target ("Target"), Field("Field") ;
+    private String type;
+    private CategoryType(String ty){type = ty;}
+    public String toString(){return type;}
+}
