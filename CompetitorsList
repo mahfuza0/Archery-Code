@@ -1,1 +1,20 @@
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+public class CompetitorsList {
+    private HashSet<CategoryType> categoryTypes;
+    public CompetitorsList(){ArrayList<Object> Competitor = new ArrayList<>();}
+
+    public void addCompetitor(Competitor competitor){competitor.add(competitor);}
+
+    public int getCompetitorsID(int competitorID) {
+        for (Competitor competitor : competitors) {
+            if (competitor.getCompetitorID() == competitorID) {
+
+            }
+        }
+        return 0;
+    }
+
+}
 
