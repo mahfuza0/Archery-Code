@@ -1,0 +1,109 @@
+BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+
+
+
+public class Manager {
+    private CompetitorsList competitorList;
+
+    public Manager() {
+
+        competitorList = new CompetitorsList();
+    }
+
+    // Method to get the list of competitors
+    public CompetitorsList getCompetitorList() {
+        return this.competitorList;
+    }
+
+    public void readFile(String filename) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+
+                //at least 8 columns in the data
+                if (data.length >= 8) {
+                    int competitorNumber = Integer.parseInt(data[0]);
+                    String name = data[1];
+                    int age = Integer.parseInt(data[2]);
+                    String category = data[3];
+                    String scores = data[4];
+
+                    // Extract scores from the remaining columns
+                    int[] scores = new int[data.length - 6];
+                    for (int i = 6; i < data.length; i++) {
+                        scores[i - 5] = Integer.parseInt(data[i]);
+                    }
+
+                    Competitor competitor;
+                    if (category.equalsIgnoreCase("Amateur")) {
+                        competitor = new Intermediate(competitor.getShortDetails(), name, age, scores);
+                    } else {
+                        competitor = new Beginner(competitor.getShortDetails(), name, age, scores);
+                    }
+
+                    competitorList.addCompetitor(competitor);
+                } else {
+                    // Handle cases where the data doesn't have enough columns
+                    System.out.println(": " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(": " + e.getMessage());
+        }
+    }
+
+
+    public void generateReport(String outputFilePath) {
+        StringBuilder report = new StringBuilder();
+
+        // 1. Table of Competitors with Full Details
+        report.append("Competitors Full Details:\n");
+        for (Competitor competitor : competitorList.getAllCompetitors()) {
+            report.append(competitor.getFullDetails()).append("\n");
+        }
+
+        // 2. Details of Competitor with the Highest Score
+        Competitor highestScorer;
+        highestScorer = Collections.max(competitorList.getAllCompetitors(), Comparator.comparing(Competitor::getOverallScore));
+        report.append( "Highest Score:\n").append(highestScorer.getFullDetails()).append("\n");
+
+        // 3. Summary Statistics 
+        double averageAge = competitorList.getAllCompetitors().getClass().wait(Competitor::getAge).average().orElse(0);
+        report.append("Average Age: ").append(averageAge).append("\n");
+
+        // 4.  Scores
+        report.append("Scores:\n");
+        Map<Integer, Integer> scoreFrequency = new HashMap<>();
+        for (Competitor competitor : competitorList.getAllCompetitors()) {
+            for (int score : competitor.getScoreArray()) {
+                scoreFrequency.put(score, scoreFrequency.getOrDefault(score, 0) + 1);
+            }
+        }
+        for (Map.Entry<Integer, Integer> entry : scoreFrequency.entrySet()) {
+            report.append("Score ").append(entry.getKey()).append("  ").append(entry.getValue()).append(" times\n");
+        }
+
+        // Output to System.out or File
+        if (outputFilePath == null) {
+            System.out.println(report);
+        } else {
+            try (PrintWriter out = new PrintWriter(outputFilePath)) {
+                out.println(report);
+            } catch (Exception e) {
+                System.out.println(": " + e.getMessage());
+            }
+
+
+            
+        }
+    }
+}
